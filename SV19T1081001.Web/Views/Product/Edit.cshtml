@@ -1,0 +1,252 @@
+﻿@model SV19T1081001.DomainModel.Product
+@{
+    ViewBag.Title = "Cập nhật mặt hàng";
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border ">
+        <h3 class="box-title">Thông tin mặt hàng</h3>
+    </div>
+
+    <div class="box-body">
+        <div class="col-lg-8 col-md-12">
+            <form class="form-horizontal" action="~/product/save" method="post" EncType="multipart/form-data">
+                <div class="form-group">
+                    @Html.HiddenFor(m => m.ProductID)
+                    <label class="control-label col-sm-2">Tên mặt hàng:</label>
+                    @*<input type="text" class="form-control" name="ProductName" autofocus>*@
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control", @autofocus = "autofocus" })
+                        @Html.ValidationMessageFor(m => m.ProductName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Đơn vị tính:</label>
+                    @*<input type="text" class="form-control" name="Unit" autofocus>*@
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Unit, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Unit, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Giá hàng:</label>
+                    @*<input type="text" class="form-control" name="Price">*@
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Loại hàng:</label>
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(m => m.CategoryID, SelectListHelper.Categories(), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.CategoryID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Nhà cung cấp:</label>
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(m => m.SupplierID, SelectListHelper.Suppliers(), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.SupplierID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Ảnh minh họa:</label>
+                    @*<input type="file" class="form-control" name="Photo" />*@
+
+                    <div class="col-sm-10">
+                        @Html.HiddenFor(m => m.Photo)
+                        <input type="file" class="form-control" id="uploadPhoto" name="uploadPhoto" onchange="document.getElementById('previewImage').src = window.URL.createObjectURL(this.files[0])" />
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-save"></i> Lưu dữ liệu
+                        </button>
+                        <a class="btn btn-warning" href="~/product">
+                            <i class="fa fa-step-backward"></i> Quay lại
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-lg-4 col-md-12">
+            <div class="form-group">
+                @*<div class="col-lg-offset-2 col-sm-10">
+                        <img src="~/Images/Products/samsung_NP900X4C.png" class="img img-bordered" style="width:150px" />
+                    </div>*@
+                <img id="previewImage" src="~/@Model.Photo" onerror="this.onerror=null;this.src='/Images/default.jpg';" alt="your image" style=" height: 250px; width: 250px; object-fit: contain; margin-left: 50%; transform: translateX(-50%);">
+            </div>
+        </div>
+    </div>
+    <div class="box-footer text-center">
+    </div>
+</div>
+
+<div class="box box-info">
+    <div class="box-header with-border ">
+        <h3 class="box-title">Thư viện ảnh</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr class="bg-gray">
+                    <th>Ảnh</th>
+                    <th>Mô tả/tiêu đề</th>
+                    <th>Thứ tự hiển thị</th>
+                    <th>Ẩn ảnh</th>
+                    <th class="text-right">
+                        <a class="btn btn-xs btn-primary" href="~/product/photo/add/@Model.ProductID">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in SV19T1081001.BusinessLayer.CommonDataService.ListOfAllProductPhoto(Model.ProductID))
+                {
+                    <tr>
+                        <td style="vertical-align:middle">
+                            <img src="~/@item.Photo" alt="" style="width:100px" onerror="this.onerror=null;this.src='/Images/default.jpg';" />
+                        </td>
+                        <td style="vertical-align:middle;">
+                            @item.Description
+                        </td>
+                        <td style="vertical-align:middle;">@item.DisplayOrder</td>
+                        <td style="vertical-align:middle;">@item.IsHidden</td>
+                        <td style="vertical-align:middle; text-align:right">
+                            <a class="btn btn-xs btn-primary" href="~/product/photo/edit/@Model.ProductID/@item.PhotoID">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <button type="button" class="btn btn-xs btn-danger button-boostrap-photo" info="@Model.ProductID/@item.PhotoID">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="box-footer text-center">
+    </div>
+
+</div>
+
+<div class="box box-success">
+    <div class="box-header with-border ">
+        <h3 class="box-title">Thuộc tính của mặt hàng</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="box-body">
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr class="bg-gray">
+                    <th>Tên thuộc tính</th>
+                    <th>Giá trị thuộc tính</th>
+                    <th>Thứ tự hiển thị</th>
+                    <th class="text-right">
+                        <a class="btn btn-xs btn-primary" href="~/product/attribute/add/@Model.ProductID">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in SV19T1081001.BusinessLayer.CommonDataService.ListOfAllProductAttribute(Model.ProductID))
+                {
+                    <tr>
+                        <td style="vertical-align:middle">@item.AttributeName</td>
+                        <td style="vertical-align:middle;">@item.AttributeValue</td>
+                        <td style="vertical-align:middle;">@item.DisplayOrder</td>
+                        <td style="vertical-align:middle; text-align:right">
+                            <a class="btn btn-xs btn-primary" href="~/product/attribute/edit/@Model.ProductID/@item.AttributeID">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <button type="button" class="btn btn-xs btn-danger button-boostrap-attribute" info="@Model.ProductID/@item.AttributeID">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="box-footer text-center">
+    </div>
+
+</div>
+<!-- /.modal -->
+<div class="modal fade" id="modal" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Thông báo</h4>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có thực sự muốn xóa trường này không</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left"id="btn-close">Đóng</button>
+                <a class="btn btn-primary" id="btn-accept">Đồng ý</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+    let btnPhoto = document.querySelectorAll(".button-boostrap-photo");
+    let btnAttribute = document.querySelectorAll(".button-boostrap-attribute");
+
+    
+    let modal = document.querySelector("#modal");
+    let btnClose = document.querySelector("#btn-close");
+    let close = document.querySelector(".close");
+    let btnAccept = document.querySelector("#btn-accept");
+
+    for (let i = 0; i < btnPhoto.length; i++) {
+        btnPhoto[i].addEventListener("click", () => {
+            modal.classList.add("in");
+            modal.style.display = "block";
+            btnAccept.href = `/product/photo/delete/${btnPhoto[i].getAttribute("info")}`;
+        })
+    }
+    for (let i = 0; i < btnAttribute.length; i++) {
+        btnAttribute[i].addEventListener("click", () => {
+            modal.classList.add("in");
+            modal.style.display = "block";
+            btnAccept.href = `/product/attribute/delete/${btnAttribute[i].getAttribute("info")}`;
+        })
+    }
+
+    close.addEventListener("click", () => {
+        modal.classList.remove("in");
+        modal.style.display = "none";
+    })
+    btnClose.addEventListener("click", () => {
+        modal.classList.remove("in");
+        modal.style.display = "none";
+    })
+</script>

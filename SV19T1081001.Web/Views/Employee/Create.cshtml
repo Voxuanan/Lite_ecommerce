@@ -1,0 +1,107 @@
+﻿@model SV19T1081001.DomainModel.Employee
+@{
+
+}
+
+
+<div class="box box-primary">
+
+    <div class="box-header with-border">
+        <h3 class="box-title"></h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-md-12">
+            <form class="form-horizontal" action="~/employee/save" method="post" EncType="multipart/form-data">
+                <div class="box-body">
+                    @*<input type="hidden" id="EmployeeID" name="EmployeeID" value="@Model.EmployeeID" />*@
+                    @Html.HiddenFor(m => m.EmployeeID)
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Họ: </label>
+                        <div class="col-sm-10">
+                            @*<input type="text" class="form-control" id="LastName" name="LastName" autofocus value="@Model.LastName" />*@
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @autofocus = "autofocus" })
+                            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Tên: </label>
+                        <div class="col-sm-10">
+                            @*<input type="text" class="form-control" id="FirstName" name="FirstName" value="@Model.FirstName" />*@
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Ngày Sinh: </label>
+                        <div class="col-sm-10">
+                            <!--<input type="date" class="form-control" id="BirthDate" name="BirthDate"--> @*value="@Model.BirthDate"*@ <!--/>-->
+                            <input type="text" name="BirthDateString" class="form-control datepicker" value="@string.Format("{0:dd/MM/yyyy}", Model.BirthDate)" />
+                            @Html.ValidationMessageFor(m => m.BirthDate, "", new { @class = "text-danger" })
+                            <input type="hidden" class="form-control" id="OldBirthDateString" name="OldBirthDateString" value="@string.Format("{0:dd/MM/yyyy}", Model.BirthDate)" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Email: </label>
+                        <div class="col-sm-10">
+                            @*<input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" />*@
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+               
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Ảnh: </label>
+                        <div class="col-sm-10">
+                            <input type="file" accept="image/*" class="form-control" id="uploadPhoto" name="uploadPhoto" onchange="document.getElementById('previewImage').src = window.URL.createObjectURL(this.files[0])" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Ghi Chú: </label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="Notes" name="Notes">@Model.Notes</textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="box-footer">
+                    <div class="form-group ">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Lưu dữ liệu</button>
+                            <a href="~/employee" class="btn btn-warning"><i class="fa fa-step-backward"></i> Quay lại</a>
+                        </div>
+                    </div>
+                </div>
+                @Html.HiddenFor(m => m.Photo)
+
+            </form>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            @if (Model.EmployeeID == 0)
+            {
+                <img id="previewImage" src="~/Images/default.jpg" alt="your image" style=" height: 250px; width: 250px; object-fit: contain; margin-left: 50%; transform: translateX(-50%);">
+
+            }
+            else
+            {
+                <img id="previewImage" src="~/@Model.Photo" alt="your image" onerror="this.onerror=null;this.src='/Images/default.jpg';" style=" height: 300px; width: 300px; object-fit: contain; margin-left: 50%; transform: translateX(-50%);">
+            }
+        </div>
+    </div>
+</div>
+
+@*<script>
+
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            let a = '@Model.BirthDate'.split(" ")[0].split("/").reverse();
+            if (a[1].length < 2) a[1] = "0" + a[1];
+            if (a[2].length < 2) a[2] = "0" + a[2];
+            a = a[0] + '-' + a[2] + '-' + a[1];
+            BirthDate.value = a;
+        });
+    </script>*@
+
+
+

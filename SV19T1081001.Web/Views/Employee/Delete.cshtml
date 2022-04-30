@@ -1,0 +1,79 @@
+﻿@model SV19T1081001.DomainModel.Employee
+@{
+    ViewBag.Title = "Xóa Nhân Viên";
+}
+
+<div class="box box-primary">
+
+    <div class="box-header with-border">
+        <h3 class="box-title"></h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-md-12">
+            <form class="form-horizontal" action="~/employee/delete/@Model.EmployeeID" method="post">
+                <div class="box-body">
+
+                    <div class="form-group" style="border-bottom: 1px dotted #ccc;">
+                        <label class="control-label col-sm-2">Họ: </label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">@Model.LastName</p>
+                        </div>
+                    </div>
+                    <div class="form-group" style="border-bottom: 1px dotted #ccc;">
+                        <label class="control-label col-sm-2">Tên: </label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">@Model.FirstName</p>
+                        </div>
+                    </div>
+                    <div class="form-group" style="border-bottom: 1px dotted #ccc;">
+                        <label class="control-label col-sm-2">Ngày Sinh: </label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">@Model.BirthDate</p>
+                        </div>
+                    </div>
+                    <div class="form-group" style="border-bottom: 1px dotted #ccc;">
+                        <label class="control-label col-sm-2">Email: </label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">@Model.Email</p>
+                        </div>
+                    </div>
+                    <div class="form-group" style="border-bottom: 1px dotted #ccc;">
+                        <label class="control-label col-sm-2">Ảnh: </label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">@Model.Photo</p>
+                        </div>
+                    </div>
+                    <div class="form-group" style="border-bottom: 1px dotted #ccc;">
+                        <label class="control-label col-sm-2">Ghi Chú: </label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">@Model.Notes</p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="box-footer">
+                    <div class="form-group ">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            @if (SV19T1081001.BusinessLayer.CommonDataService.InUsedEmployee(Model.EmployeeID))
+                            {
+                                <p class="text-danger">Không được xóa nhân viên này</p>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-close"></i> Xóa dữ liệu</button>
+                            }
+                            <a href="~/employee" class="btn btn-warning"><i class="fa fa-step-backward"></i> Quay lại</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <img id="blah" src="~/@Model.Photo" alt="your image" onerror="this.onerror=null;this.src='/Images/default.jpg';" style=" height: 250px; width: 250px; object-fit: contain; margin-left: 50%; transform: translateX(-50%);">
+        </div>
+    </div>
+</div>
+
+
+

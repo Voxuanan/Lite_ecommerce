@@ -1,0 +1,6 @@
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.DomainModel\bin\Debug\SV19T1081001.DomainModel.dll
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.DomainModel\bin\Debug\SV19T1081001.DomainModel.pdb
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.DomainModel\obj\Debug\SV19T1081001.DomainModel.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.DomainModel\obj\Debug\SV19T1081001.DomainModel.dll
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.DomainModel\obj\Debug\SV19T1081001.DomainModel.pdb
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.DomainModel\obj\Debug\SV19T1081001.DomainModel.csprojAssemblyReference.cache

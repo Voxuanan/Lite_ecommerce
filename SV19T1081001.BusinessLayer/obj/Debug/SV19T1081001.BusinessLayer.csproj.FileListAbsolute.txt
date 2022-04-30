@@ -1,0 +1,11 @@
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.BusinessLayer\bin\Debug\SV19T1081001.BusinessLayer.dll
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.BusinessLayer\bin\Debug\SV19T1081001.BusinessLayer.pdb
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.BusinessLayer\obj\Debug\SV19T1081001.BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.BusinessLayer\obj\Debug\SV19T1081001.BusinessLayer.dll
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.BusinessLayer\obj\Debug\SV19T1081001.BusinessLayer.pdb
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.BusinessLayer\bin\Debug\SV19T1081001.DataLayer.dll
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.BusinessLayer\bin\Debug\SV19T1081001.DomainModel.dll
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.BusinessLayer\bin\Debug\SV19T1081001.DataLayer.pdb
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.BusinessLayer\bin\Debug\SV19T1081001.DomainModel.pdb
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.BusinessLayer\obj\Debug\SV19T1081001.BusinessLayer.csprojAssemblyReference.cache
+C:\Users\DELL\Desktop\Things\TaiLieuDeHocOTruong\LapTrinhWeb\LapTrinhWeb\SV19T1081001\SV19T1081001.BusinessLayer\obj\Debug\SV19T1081001.BusinessLayer.csproj.CopyComplete
