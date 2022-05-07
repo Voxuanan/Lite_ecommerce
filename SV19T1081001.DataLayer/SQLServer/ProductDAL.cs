@@ -128,12 +128,12 @@ namespace SV19T1081001.DataLayer.SQLServer
                 cmd.CommandText =
                     @"
                     SELECT CASE
-	                    WHEN EXISTS(SELECT * FROM Products AS p JOIN OrderDetails AS od ON od.ProductID = p.ProductID
-	                    WHERE p.ProductID = @ProductID) THEN 1 
-	                    WHEN EXISTS(SELECT * FROM Products AS p JOIN ProductAttributes AS pa ON pa.ProductID = p.ProductID
-	                    WHERE p.ProductID = @ProductID) THEN 1 
-	                    WHEN EXISTS(SELECT * FROM Products AS p JOIN ProductPhotos AS pp ON pp.ProductID = p.ProductID
-	                    WHERE p.ProductID = @ProductID) THEN 1 
+	                    WHEN EXISTS(SELECT * FROM OrderDetails 
+	                    WHERE ProductID = @ProductID) THEN 1 
+	                    WHEN EXISTS(SELECT * FROM ProductAttributes
+	                    WHERE ProductID = @ProductID) THEN 1 
+	                    WHEN EXISTS(SELECT * FROM ProductPhotos
+	                    WHERE ProductID = @ProductID) THEN 1 
                     ELSE 0 END";
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = cn;

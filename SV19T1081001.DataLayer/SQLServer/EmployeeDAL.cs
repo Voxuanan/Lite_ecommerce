@@ -11,10 +11,18 @@ namespace SV19T1081001.DataLayer.SQLServer
 {
     public class EmployeeDAL : _BaseDAL, ICommonDAL<Employee>
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="connectionString"></param>
         public EmployeeDAL(string connectionString) : base(connectionString)
         {
         }
-
+        /// <summary>
+        /// Thêm một nhân viên
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public int Add(Employee data)
         {
             int result = 0;
@@ -41,7 +49,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Số lượng tìm kiếm được
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public int Count(string searchValue)
         {
             int count = 0;
@@ -65,7 +77,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return count;
         }
-
+        /// <summary>
+        /// Xóa một nhân viên
+        /// </summary>
+        /// <param name="employeeID"></param>
+        /// <returns></returns>
         public bool Delete(int employeeID)
         {
             bool result = false;
@@ -83,7 +99,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Lấy thông tin một nhân viên
+        /// </summary>
+        /// <param name="employeeID"></param>
+        /// <returns></returns>
         public Employee Get(int employeeID)
         {
             Employee result = new Employee();
@@ -114,7 +134,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Kiểm tra nhân viên có được sử dụng hay chưa
+        /// </summary>
+        /// <param name="employeeID"></param>
+        /// <returns></returns>
         public bool InUsed(int employeeID)
         {
             bool result = false;
@@ -132,7 +156,13 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Lấy danh sách nhân viên
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public IList<Employee> List(int page, int pageSize, string searchValue)
         {
             List<Employee> data = new List<Employee>();
@@ -177,7 +207,11 @@ namespace SV19T1081001.DataLayer.SQLServer
 
             return data;
         }
-
+        /// <summary>
+        /// Chỉnh sửa nhân viên
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool Update(Employee data)
         {
             bool result = false;

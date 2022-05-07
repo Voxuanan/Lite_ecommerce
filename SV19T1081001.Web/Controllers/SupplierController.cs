@@ -13,31 +13,43 @@ namespace SV19T1081001.Web.Controllers
     public class SupplierController : Controller
     {
         /// <summary>
-        /// Tìm kiếm hiển thị danh sách nhà cung cấp
+        /// Giao diện tìm kiếm
         /// </summary>
         /// <returns></returns>
         public ActionResult Index(string page = "1", string searchValue = "")
         {
-            int pageInt = 1;
-            try
+            PaginationSearchInput model = Session["SUPPLIER_SEARCH"] as PaginationSearchInput;
+            if (model == null)
             {
-                pageInt = Convert.ToInt32(page);
+                model = new PaginationSearchInput()
+                {
+                    Page = 1,
+                    PageSize = 10,
+                    SearchValue = "",
+                };
             }
-            catch { }
-            int pageSize = 10;
+            return View(model);
+        }
+        /// <summary>
+        /// Tìm kiếm và trả về danh sách phân trang nhà cung cấp
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public ActionResult Search(PaginationSearchInput input)
+        {
             int rowCount = 0;
-            var data = CommonDataService.ListOfSupplier(pageInt, pageSize, searchValue, out rowCount);
-            DomainModel.SupplierPaginationResult model = new DomainModel.SupplierPaginationResult()
+            var data = CommonDataService.ListOfSupplier(input.Page, input.PageSize, input.SearchValue, out rowCount);
+            SupplierPaginationResult model = new DomainModel.SupplierPaginationResult()
             {
-                Page = pageInt,
-                PageSize = pageSize,
-                SearchValue = searchValue,
+                Page = input.Page,
+                PageSize = input.PageSize,
+                SearchValue = input.SearchValue,
                 RowCount = rowCount,
                 Data = data,
             };
+            Session["SUPPLIER_SEARCH"] = input;
             return View(model);
         }
-
         /// <summary>
         /// Thêm nhà cung cấp
         /// </summary>
@@ -72,6 +84,11 @@ namespace SV19T1081001.Web.Controllers
             ViewBag.Title = "Chỉnh Sửa Nhà Cung Cấp";
             return View("Create",model);
         }
+        /// <summary>
+        /// Xử lí các tác vụ nhà cung cấp
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Save(Supplier model)
         {
@@ -95,7 +112,12 @@ namespace SV19T1081001.Web.Controllers
                 ViewBag.Title = model.SupplierID == 0 ? "Bổ sung nhà cung cấp" : "Chỉnh sửa nhà cung cấp";
                 return View("Create", model);
             }
-
+            Session["SUPPLIER_SEARCH"] = new PaginationSearchInput()
+            {
+                SearchValue = model.SupplierName,
+                PageSize = 10,
+                Page = 1,
+            };
             // Lưu dữ liệu
             if (model.SupplierID == 0)
             {

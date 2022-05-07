@@ -11,10 +11,18 @@ namespace SV19T1081001.DataLayer.SQLServer
 {
     public class CategoryDAL : _BaseDAL, ICommonDAL<Category>
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="connectionString"></param>
         public CategoryDAL(string connectionString) : base(connectionString)
         {
         }
-
+        /// <summary>
+        /// Thêm một loại hàng
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public int Add(Category data)
         {
             int result = 0;
@@ -37,7 +45,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Số lượng kết quả tìm kiếm được
+        /// </summary>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public int Count(string searchValue)
         {
             int count = 0;
@@ -61,7 +73,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return count;
         }
-
+        /// <summary>
+        /// Xóa một loại hàng
+        /// </summary>
+        /// <param name="categoryID"></param>
+        /// <returns></returns>
         public bool Delete(int categoryID)
         {
             bool result = false;
@@ -79,7 +95,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Lấy thông tin một loại hàng
+        /// </summary>
+        /// <param name="categoryID"></param>
+        /// <returns></returns>
         public Category Get(int categoryID)
         {
             Category result = new Category();
@@ -106,7 +126,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Kiểm tra loại hàng có được sử dụng hay chưa
+        /// </summary>
+        /// <param name="categoryID"></param>
+        /// <returns></returns>
         public bool InUsed(int categoryID)
         {
             bool result = false;
@@ -124,7 +148,13 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Lấy danh sách loại hàng
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public IList<Category> List(int page, int pageSize, string searchValue)
         {
             List<Category> data = new List<Category>();
@@ -165,7 +195,11 @@ namespace SV19T1081001.DataLayer.SQLServer
 
             return data;
         }
-
+        /// <summary>
+        /// Chỉnh sửa loại hàng
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool Update(Category data)
         {
             bool result = false;

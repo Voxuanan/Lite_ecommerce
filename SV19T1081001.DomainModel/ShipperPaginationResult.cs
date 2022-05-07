@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 namespace SV19T1081001.DomainModel
 {
     /// <summary>
-    /// Danh sách người giao hàng
+    /// Kết quả tìm kiếm người giao hàng
     /// </summary>
     public class ShipperPaginationResult : BasePaginationResult
     {
+        /// <summary>
+        /// Danh sách người giao hàng
+        /// </summary>
         public List<Shipper> Data { get; set; }
     }
 }

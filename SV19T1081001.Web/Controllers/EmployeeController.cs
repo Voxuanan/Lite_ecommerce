@@ -16,28 +16,41 @@ namespace SV19T1081001.Web.Controllers
     public class EmployeeController : Controller
     {
         /// <summary>
-        /// Nhân viên
+        /// Giao diện tìm kiếm
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index(string page = "1", string searchValue = "")
+        public ActionResult Index()
         {
-            int pageInt = 1;
-            try
+            PaginationSearchInput model = Session["EMPLOYEE_SEARCH"] as PaginationSearchInput;
+            if (model == null)
             {
-                pageInt = Convert.ToInt32(page);
+                model = new PaginationSearchInput()
+                {
+                    Page = 1,
+                    PageSize = 10,
+                    SearchValue = "",
+                };
             }
-            catch { }
-            int pageSize = 10;
+            return View(model);
+        }
+        /// <summary>
+        /// Tìm kiếm và trả về danh sách phân trang nhân viên
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public ActionResult Search(PaginationSearchInput input)
+        {
             int rowCount = 0;
-            var data = CommonDataService.ListOfEmployee(pageInt, pageSize, searchValue, out rowCount);
-            DomainModel.EmployeePaginationResult model = new DomainModel.EmployeePaginationResult()
+            var data = CommonDataService.ListOfEmployee(input.Page, input.PageSize, input.SearchValue, out rowCount);
+            EmployeePaginationResult model = new DomainModel.EmployeePaginationResult()
             {
-                Page = pageInt,
-                PageSize = pageSize,
-                SearchValue = searchValue,
+                Page = input.Page,
+                PageSize = input.PageSize,
+                SearchValue = input.SearchValue,
                 RowCount = rowCount,
                 Data = data,
             };
+            Session["EMPLOYEE_SEARCH"] = input;
             return View(model);
         }
 
@@ -76,6 +89,14 @@ namespace SV19T1081001.Web.Controllers
             ViewBag.Title = "Chỉnh Sửa Nhân Viên";
             return View("Create", model);
         }
+        /// <summary>
+        /// Xử lí các tác vụ nhân viên
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="uploadPhoto"></param>
+        /// <param name="birthDateString"></param>
+        /// <param name="oldBirthDateString"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Save(Employee model, HttpPostedFileBase uploadPhoto, string birthDateString, string oldBirthDateString)
         {
@@ -122,7 +143,12 @@ namespace SV19T1081001.Web.Controllers
             catch (Exception)
             {
             }
-
+            Session["EMPLOYEE_SEARCH"] = new PaginationSearchInput()
+            {
+                SearchValue = model.FirstName + ' '+model.LastName,
+                PageSize = 10,
+                Page = 1,
+            };
 
             // Lưu dữ liệu
             if (model.EmployeeID == 0)

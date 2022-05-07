@@ -13,42 +13,43 @@ namespace SV19T1081001.Web.Controllers
     public class CustomerController : Controller
     {
         /// <summary>
-        /// Tìm kiếm hiển thị danh sách khách hàng
+        /// Giao diện tìm kiếm
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index(string page = "1", string searchValue = "")
+        public ActionResult Index()
         {
-            int pageInt = 1;
-            try
+            PaginationSearchInput model = Session["CUSTOMER_SEARCH"] as PaginationSearchInput;
+            if (model == null)
             {
-                pageInt = Convert.ToInt32(page);
+                model = new PaginationSearchInput()
+                {
+                    Page = 1,
+                    PageSize = 10,
+                    SearchValue = "",
+                };
             }
-            catch { }
-
-            int pageSize = 10;
+            return View(model);
+        }
+        /// <summary>
+        /// Tìm kiếm và tra về danh sách phân trang khách hàng
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public ActionResult Search(PaginationSearchInput input)
+        {
             int rowCount = 0;
-            var data = CommonDataService.ListOfCustomer(pageInt, pageSize, searchValue, out rowCount);
-            // Code cũ trước khi refactor
-            //int pageCount = rowCount / pageSize;
-            //if (rowCount % pageSize > 0)
-            //{
-            //    pageCount++;
-            //}
-            //ViewBag.RowCount = rowCount;
-            //ViewBag.PageCount = pageCount;
-            //ViewBag.SearchValue = searchValue;
-            //ViewBag.CurrentPage = page;
+            var data = CommonDataService.ListOfCustomer(input.Page, input.PageSize, input.SearchValue, out rowCount);
             CustomerPaginationResult model = new DomainModel.CustomerPaginationResult()
             {
-                Page = pageInt,
-                PageSize = pageSize,
-                SearchValue = searchValue,
+                Page = input.Page,
+                PageSize = input.PageSize,
+                SearchValue = input.SearchValue,
                 RowCount = rowCount,
                 Data = data,
             };
+            Session["CUSTOMER_SEARCH"] = input;
             return View(model);
         }
-
         /// <summary>
         /// Thêm khách hàng
         /// </summary>
@@ -83,6 +84,11 @@ namespace SV19T1081001.Web.Controllers
             ViewBag.Title = "Chỉnh Sửa Khách Hàng";
             return View("Create", model);
         }
+        /// <summary>
+        /// Xử lí các tác vụ khách hàng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Save(Customer model)
         {
@@ -103,7 +109,12 @@ namespace SV19T1081001.Web.Controllers
                 ViewBag.Title = model.CustomerID == 0 ? "Bổ sung khách hàng" : "Chỉnh sửa khách hàng";
                 return View("Create",model);
             }
-
+            Session["CUSTOMER_SEARCH"] = new PaginationSearchInput()
+            {
+                SearchValue = model.CustomerName,
+                PageSize = 10,
+                Page = 1,
+            };
             // Lưu dữ liệu
             if (model.CustomerID == 0)
             {

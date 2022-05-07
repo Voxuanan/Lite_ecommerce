@@ -49,6 +49,8 @@
     <Compile Include="CustomerPaginationResult.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeePaginationResult.cs" />
+    <Compile Include="PaginationSearchInput.cs" />
+    <Compile Include="PaginationSearchInputForProduct.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductAttribute.cs" />
     <Compile Include="ProductPaginationResult.cs" />

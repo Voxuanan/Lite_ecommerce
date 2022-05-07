@@ -13,28 +13,41 @@ namespace SV19T1081001.Web.Controllers
     public class CategoryController : Controller
     {
        /// <summary>
-       /// Loại hàng
+       /// Giao diện tìm kiếm
        /// </summary>
        /// <returns></returns>
-        public ActionResult Index(string page ="1", string searchValue = "")
+        public ActionResult Index()
         {
-            int pageInt = 1;
-            try
+            PaginationSearchInput model = Session["CATEGORY_SEARCH"] as PaginationSearchInput;
+            if (model == null)
             {
-                pageInt = Convert.ToInt32(page);
+                model = new PaginationSearchInput()
+                {
+                    Page = 1,
+                    PageSize = 10,
+                    SearchValue = "",
+                };
             }
-            catch { }
-            int pageSize = 10;
+            return View(model);
+        }
+        /// <summary>
+        /// Tìm kiếm và trả về danh sách phân trang loại hàng
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public ActionResult Search(PaginationSearchInput input)
+        {
             int rowCount = 0;
-            var data = CommonDataService.ListOfCategory(pageInt, pageSize, searchValue, out rowCount);
-            DomainModel.CategoryPaginationResult model = new DomainModel.CategoryPaginationResult()
+            var data = CommonDataService.ListOfCategory(input.Page, input.PageSize, input.SearchValue, out rowCount);
+            CategoryPaginationResult model = new DomainModel.CategoryPaginationResult()
             {
-                Page = pageInt,
-                PageSize = pageSize,
-                SearchValue = searchValue,
+                Page = input.Page,
+                PageSize = input.PageSize,
+                SearchValue = input.SearchValue,
                 RowCount = rowCount,
                 Data = data,
             };
+            Session["CATEGORY_SEARCH"] = input;
             return View(model);
         }
         /// <summary>
@@ -71,6 +84,11 @@ namespace SV19T1081001.Web.Controllers
             ViewBag.Title = "Chỉnh Sửa Loại Hàng";
             return View("Create", model);
         }
+        /// <summary>
+        /// Xử lí các tác vụ loại hàng
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Save(Category model)
         {
@@ -84,6 +102,12 @@ namespace SV19T1081001.Web.Controllers
                 ViewBag.Title = model.CategoryID == 0 ? "Bổ sung loại hàng" : "Chỉnh sửa loại hàng";
                 return View("Create", model);
             }
+            Session["CATEGORY_SEARCH"] = new PaginationSearchInput()
+            {
+                SearchValue = model.CategoryName,
+                PageSize = 10,
+                Page = 1,   
+            };
             if (model.CategoryID == 0)
             {
                 CommonDataService.AddCategory(model);

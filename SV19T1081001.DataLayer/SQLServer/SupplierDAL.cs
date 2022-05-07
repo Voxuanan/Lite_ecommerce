@@ -18,7 +18,11 @@ namespace SV19T1081001.DataLayer.SQLServer
         public SupplierDAL(string connectionString) : base(connectionString)
         {
         }
-
+        /// <summary>
+        /// Thêm một nhà cung cấp
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public int Add(Supplier data)
         {
             int result = 0;
@@ -73,7 +77,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return count;
         }
-
+        /// <summary>
+        /// Xóa một nhà cung cấp có sẵn
+        /// </summary>
+        /// <param name="supplierID"></param>
+        /// <returns></returns>
         public bool Delete(int supplierID)
         {
             bool result = false;
@@ -91,7 +99,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Lấy dữ liệu một nhà cung cấp
+        /// </summary>
+        /// <param name="supplierID"></param>
+        /// <returns></returns>
         public Supplier Get(int supplierID)
         {
             Supplier result = new Supplier();
@@ -123,7 +135,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Kiểm tra nhà cung cấp có được sử dụng hay chưa
+        /// </summary>
+        /// <param name="supplierID"></param>
+        /// <returns></returns>
         public bool InUsed(int supplierID)
         {
             bool result = false;
@@ -141,7 +157,13 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Lấy danh sách các nhà cung cấp
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public IList<Supplier> List(int page, int pageSize, string searchValue)
         {
             List<Supplier> data = new List<Supplier>();
@@ -187,7 +209,11 @@ namespace SV19T1081001.DataLayer.SQLServer
 
             return data;
         }
-
+        /// <summary>
+        /// Chỉnh sửa nhà cung cấp
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool Update(Supplier data)
         {
             bool result = false;

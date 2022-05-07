@@ -31,7 +31,10 @@ namespace SV19T1081001.Web
             }
             return list;
         }
-
+        /// <summary>
+        /// Danh sách loại hàng
+        /// </summary>
+        /// <returns></returns>
         public static List<SelectListItem> Categories()
         {
             List<SelectListItem> list = new List<SelectListItem>();
@@ -50,6 +53,10 @@ namespace SV19T1081001.Web
             }
             return list;
         }
+        /// <summary>
+        /// Danh sách nhà cung cấp
+        /// </summary>
+        /// <returns></returns>
         public static List<SelectListItem> Suppliers()
         {
             List<SelectListItem> list = new List<SelectListItem>();

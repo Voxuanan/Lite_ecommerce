@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace SV19T1081001.DataLayer
 {
+    /// <summary>
+    /// Đinh nghĩa các phép xử lý dữ liệu trên mặt hàng
+    /// </summary>
+    /// <typeparam name="Product"></typeparam>
     public interface IProductDAL<Product>
     {
         IList<Product> List(int page = 1, int pageSize = 0, string searchValue = "", int supplierID = 0, int categoryID = 0);

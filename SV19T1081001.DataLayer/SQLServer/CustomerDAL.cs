@@ -23,7 +23,7 @@ namespace SV19T1081001.DataLayer.SQLServer
         }
 
         /// <summary>
-        /// 
+        /// Thêm một khách hàng
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -81,7 +81,7 @@ namespace SV19T1081001.DataLayer.SQLServer
                 return count;
         }
         /// <summary>
-        /// 
+        /// Xóa một khách hàng
         /// </summary>
         /// <param name="customerID"></param>
         /// <returns></returns>
@@ -103,7 +103,7 @@ namespace SV19T1081001.DataLayer.SQLServer
             return result;
         }
         /// <summary>
-        /// 
+        /// Lấy thông tin một khách hàng
         /// </summary>
         /// <param name="customerID"></param>
         /// <returns></returns>
@@ -138,7 +138,7 @@ namespace SV19T1081001.DataLayer.SQLServer
             return result;
         }
         /// <summary>
-        /// 
+        /// Kiểm tra xem khách hàng có được sử dụng hay chưa
         /// </summary>
         /// <param name="customerID"></param>
         /// <returns></returns>
@@ -160,7 +160,7 @@ namespace SV19T1081001.DataLayer.SQLServer
              return result;
         }
         /// <summary>
-        /// 
+        /// Lây danh sách khách hàng
         /// </summary>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
@@ -211,7 +211,7 @@ namespace SV19T1081001.DataLayer.SQLServer
             return data;
         }
         /// <summary>
-        /// 
+        /// Chỉnh sửa khách hàng
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>

@@ -11,10 +11,18 @@ namespace SV19T1081001.DataLayer.SQLServer
 {
     public class ProductAttributesDAL : _BaseDAL, IProductInfoDAL<ProductAttribute>
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="connectionString"></param>
         public ProductAttributesDAL(string connectionString) : base(connectionString)
         {
         }
-
+        /// <summary>
+        /// Thêm thuộc tính cho mặt hàng
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public int Add(ProductAttribute data)
         {
             int result = 0;
@@ -39,12 +47,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
-        //public int Count(int productID, int attributeID)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
+        /// <summary>
+        /// Xóa thuộc tính mặt hàng
+        /// </summary>
+        /// <param name="attributeID"></param>
+        /// <returns></returns>
         public bool Delete(int attributeID)
         {
             bool result = false;
@@ -62,7 +69,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Lấy thông tin thuộc tính mặt hàng
+        /// </summary>
+        /// <param name="attributeID"></param>
+        /// <returns></returns>
         public ProductAttribute Get(int attributeID)
         {
             ProductAttribute result = new ProductAttribute();
@@ -91,12 +102,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
-        //public bool InUsed(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
+        /// <summary>
+        /// Lấy danh sách thuộc tính mặt hàng
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
         public IList<ProductAttribute> List(int productID)
         {
             List<ProductAttribute> data = new List<ProductAttribute>();
@@ -130,7 +140,11 @@ namespace SV19T1081001.DataLayer.SQLServer
 
             return data;
         }
-
+        /// <summary>
+        /// Chỉnh sửa thuộc tính mặt hàng
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool Update(ProductAttribute data)
         {
             bool result = false;

@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace SV19T1081001.DomainModel
 {
+    /// <summary>
+    /// Quốc gia
+    /// </summary>
     public class Country
     {
+        /// <summary>
+        /// Tên quốc gia
+        /// </summary>
         public string CountryName {get; set;}
     }
 }

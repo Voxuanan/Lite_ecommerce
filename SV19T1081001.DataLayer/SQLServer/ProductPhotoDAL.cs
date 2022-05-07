@@ -11,10 +11,18 @@ namespace SV19T1081001.DataLayer.SQLServer
 {
     public class ProductPhotoDAL : _BaseDAL, IProductInfoDAL<ProductPhoto>
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="connectionString"></param>
         public ProductPhotoDAL(string connectionString) : base(connectionString)
         {
         }
-
+        /// <summary>
+        /// Thêm ảnh cho mặt hàng
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public int Add(ProductPhoto data)
         {
             int result = 0;
@@ -40,12 +48,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
-        //public int Count(int productID, int photoID)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
+        /// <summary>
+        /// Xóa ảnh mặt hàng
+        /// </summary>
+        /// <param name="photoID"></param>
+        /// <returns></returns>
         public bool Delete(int photoID)
         {
             bool result = false;
@@ -63,7 +70,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Lấy thông tin ảnh mặt hàng
+        /// </summary>
+        /// <param name="photoID"></param>
+        /// <returns></returns>
         public ProductPhoto Get(int photoID)
         {
             ProductPhoto result = new ProductPhoto();
@@ -93,12 +104,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
-        //public bool InUsed(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
+        /// <summary>
+        /// Lấy danh sách các ảnh mặt hàng
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
         public IList<ProductPhoto> List(int productID)
         {
             List<ProductPhoto> data = new List<ProductPhoto>();
@@ -133,7 +143,11 @@ namespace SV19T1081001.DataLayer.SQLServer
 
             return data;
         }
-
+        /// <summary>
+        /// Chỉnh sửa ảnh mặt hàng
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool Update(ProductPhoto data)
         {
             bool result = false;

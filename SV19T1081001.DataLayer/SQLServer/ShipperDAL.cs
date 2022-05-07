@@ -19,7 +19,7 @@ namespace SV19T1081001.DataLayer.SQLServer
         {
         }
         /// <summary>
-        /// 
+        /// Thêm một người giao hàng
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -73,7 +73,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return count;
         }
-
+        /// <summary>
+        /// Xóa một người giao hàng có sẵn
+        /// </summary>
+        /// <param name="shipperID"></param>
+        /// <returns></returns>
         public bool Delete(int shipperID)
         {
             bool result = false;
@@ -91,7 +95,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Lấy dữ liệu một người giao hàng
+        /// </summary>
+        /// <param name="shipperID"></param>
+        /// <returns></returns>
         public Shipper Get(int shipperID)
         {
             Shipper result = new Shipper();
@@ -118,7 +126,11 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Kiểm tra người giao hàng đã được sử dụng hay chưa
+        /// </summary>
+        /// <param name="shipperID"></param>
+        /// <returns></returns>
         public bool InUsed(int shipperID)
         {
             bool result = false;
@@ -136,7 +148,13 @@ namespace SV19T1081001.DataLayer.SQLServer
             }
             return result;
         }
-
+        /// <summary>
+        /// Lấy danh sách các người giao hàng
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
         public IList<Shipper> List(int page, int pageSize, string searchValue)
         {
             List<Shipper> data = new List<Shipper>();
@@ -177,7 +195,11 @@ namespace SV19T1081001.DataLayer.SQLServer
 
             return data;
         }
-
+        /// <summary>
+        /// Chỉnh sửa người giao hàng
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool Update(Shipper data)
         {
             bool result = false;
