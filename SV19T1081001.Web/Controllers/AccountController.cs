@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SV19T1081001.BusinessLayer;
+using SV19T1081001.DomainModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -30,13 +32,16 @@ namespace SV19T1081001.Web.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            // TODO: Thay đổi code đề kiểm tra đúng tài khoản
-            if (username == "admin@gmail.com" && password == "123")
+            Account account = null;
+            account = CommonDataService.LogIn(username, password);
+            if (account != null)
             {
                 // Ghi cookie ghi nhận phiên đăng nhập
                 FormsAuthentication.SetAuthCookie(username, false);
+                Session["ACCOUNT"] = account;
                 return RedirectToAction("Index", "Home");
-            } else
+            }
+            else
             {
                 ViewBag.UserName = username;
                 ViewBag.Message = "Đăng nhập thất bại";
@@ -47,9 +52,34 @@ namespace SV19T1081001.Web.Controllers
         /// Đổi mặt khẩu
         /// </summary>
         /// <returns></returns>
-        public ActionResult ChangePassword()
+        public ActionResult ChangePassword(string password, string newPassword, string confirmPassword)
         {
-            return View();
+            Account model = Session["ACCOUNT"] as Account;
+            if (Request.HttpMethod == "POST")
+            {
+                if (string.IsNullOrWhiteSpace(password))
+                    ModelState.AddModelError("Password", "Mật khẩu cũ không được để trống!");
+                if (string.IsNullOrWhiteSpace(newPassword))
+                    ModelState.AddModelError("NewPassword", "Mật khẩu mới không được để trống!");
+                if (newPassword != confirmPassword)
+                    ModelState.AddModelError("ConfirmPassword", "Mật khẩu nhập lại phải giống mật khẩu mới!");
+                if (!ModelState.IsValid) {
+                    ViewBag.Password = password;
+                    ViewBag.NewPassword = newPassword;
+                    ViewBag.ConfirmPassword = confirmPassword;
+                    return View(model); 
+                }
+                bool hasChanged = CommonDataService.ChangePassword(model.Email, password, newPassword);
+                if (!hasChanged)
+                {
+                    ModelState.AddModelError("Password", "Mật khẩu cũ không đúng!");
+                    return View(model);
+                }
+                model.Password = newPassword;
+                Session["ACCOUNT"] = model;
+                return Redirect("~/");
+            }
+            return View(model);
         }
         /// <summary>
         /// Đăng xuất

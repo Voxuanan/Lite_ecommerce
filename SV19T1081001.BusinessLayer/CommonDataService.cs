@@ -21,6 +21,7 @@ namespace SV19T1081001.BusinessLayer
         private static readonly ICommonDAL<Employee> employeeDB;
         private static readonly ICommonDAL<Country> countryDB;
         private static readonly IProductDAL productDB;
+        private static readonly IAccountDAL accountDB;
         private static readonly IProductInfoDAL<ProductAttribute> productAttributeDB;
         private static readonly IProductInfoDAL<ProductPhoto> productPhotoDB;
         /// <summary>
@@ -40,6 +41,7 @@ namespace SV19T1081001.BusinessLayer
                     employeeDB = new DataLayer.SQLServer.EmployeeDAL(connectionString);
                     countryDB = new DataLayer.SQLServer.CountryDAL(connectionString);
                     productDB = new DataLayer.SQLServer.ProductDAL(connectionString);
+                    accountDB = new DataLayer.SQLServer.AccountDAL(connectionString);
                     productAttributeDB = new DataLayer.SQLServer.ProductAttributesDAL(connectionString);
                     productPhotoDB = new DataLayer.SQLServer.ProductPhotoDAL(connectionString);
                     break;
@@ -47,6 +49,20 @@ namespace SV19T1081001.BusinessLayer
                     //categoryDB = new DataLayer.FakeDB.CategoryDAL();
                     break;
             }
+        }
+        /// <summary>
+        /// Đăng nhập hệ thống
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static Account LogIn(string email, string password)
+        {
+            return accountDB.LogIn(email, password);
+        }
+        public static bool ChangePassword(string email, string oldPassword, string newPassword)
+        {
+            return accountDB.ChangePassword(email, oldPassword, newPassword);
         }
         /// <summary>
         /// Lấy danh sách tất cả thuộc tính mặt hàng
