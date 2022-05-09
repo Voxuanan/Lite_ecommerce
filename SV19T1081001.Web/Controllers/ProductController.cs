@@ -63,8 +63,6 @@ namespace SV19T1081001.Web.Controllers
                 SearchValue = input.SearchValue,
                 RowCount = rowCount,
                 Data = data,
-                SupplierID = input.SupplierID,
-                CategoryID = input.CategoryID,
             };
             Session["PRODUCT_SEARCH"] = input;
             return View(model);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SV19T1081001.DomainModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace SV19T1081001.DataLayer
     /// Đinh nghĩa các phép xử lý dữ liệu trên mặt hàng
     /// </summary>
     /// <typeparam name="Product"></typeparam>
-    public interface IProductDAL<Product>
+    public interface IProductDAL
     {
         IList<Product> List(int page = 1, int pageSize = 0, string searchValue = "", int supplierID = 0, int categoryID = 0);
         int Count(string searchValue, int supplierID = 0, int categoryID = 0);

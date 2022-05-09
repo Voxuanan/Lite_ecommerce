@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SV19T1081001.DataLayer.SQLServer
 {
-    public class ProductDAL : _BaseDAL, IProductDAL<Product>
+    public class ProductDAL : _BaseDAL, IProductDAL
     {
         public ProductDAL(string connectionString) : base(connectionString)
         {

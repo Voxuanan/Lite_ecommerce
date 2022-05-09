@@ -20,7 +20,7 @@ namespace SV19T1081001.BusinessLayer
         private static readonly ICommonDAL<Shipper> shipperDB;
         private static readonly ICommonDAL<Employee> employeeDB;
         private static readonly ICommonDAL<Country> countryDB;
-        private static readonly IProductDAL<Product> productDB;
+        private static readonly IProductDAL productDB;
         private static readonly IProductInfoDAL<ProductAttribute> productAttributeDB;
         private static readonly IProductInfoDAL<ProductPhoto> productPhotoDB;
         /// <summary>
