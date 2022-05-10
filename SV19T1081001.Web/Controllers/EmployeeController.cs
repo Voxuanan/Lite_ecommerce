@@ -159,6 +159,20 @@ namespace SV19T1081001.Web.Controllers
             else
             {
                 CommonDataService.UpdateEmployee(model);
+                 if (model.EmployeeID ==  (Session["ACCOUNT"] as Account).EmployeeID)
+                {
+                    Account account = new Account()
+                    {
+                        EmployeeID = model.EmployeeID,
+                        BirthDate = model.BirthDate,
+                        Email = model.Email,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Notes = model.Notes,
+                        Photo = model.Photo,
+                    };
+                    Session["ACCOUNT"] = account;
+                }
                 return RedirectToAction("Index");
             }
         }
