@@ -1,0 +1,37 @@
+/// note
+ctrl + m + o : rút gọn note
+ctl + m + l : tắt rút gọn note
+
+//1 Dạng đại diện cho mảng, list ...
+IEnumerable
+
+// Kết nối
+1. Tạo và mở kết nối đén CSDL (sqlConnection)
+2. Tạo đối tượng sqlCommand với các thuộc tính:
+	+ CommandText: Tập lệnh SQL cần thực thi
+	+ CommandType:
+	+ Connection: = (1)
+	+ (option) Parameter: tham số của câu lệnh (nếu có)
+3. Thực thi câu lệnh, nhận kết quả và xử lý
+Tùy thuộc vào dữ liệu cần trả về khác nhau mà có các hàm thực thi khác nhau
+	+ ExecuteReader: Dữ liệu trả về là dưới dạng bảng
+	+ ExecuteScalar: DỮ liệu trả về là 1 giá trị (1 cột/ 1 dòng)
+	+ ExecuteNonQuery: Có bao nhiêu dòng dữ liệu bị tác động bởi câu lệnh
+4. Đóng những cái đã mở mà không còn dùng
+
+
+// ModelState trong view
+if (ViewData.ModelState.IsValid){
+	<div>
+		// display all lỗi
+		@Html.ValidationSummary()
+	</div>
+}
+// display 1 lỗi theo tên
+	@Html.ValidationMessage("CustomerName", new { @class = "text-danger" })
+// cách viết khác của input trong view
+	@Html.TextBoxFor(m => m.SupplierName, new { @class = "form-control", @autofocus = "autofocus" })
+
+// ép kiếu (nếu giá trị không phù hợp thì trả về null thay vì trả về lỗi như thông thường)
+      PaginationSearchInput model = Session["CUSTOMER_SEARCH"] as PaginationSearchInput;
+	
